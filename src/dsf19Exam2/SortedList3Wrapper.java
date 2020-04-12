@@ -210,14 +210,15 @@ public class SortedList3Wrapper {
 			Node temp = null;
 			for (temp = header.getNext(); temp != header; temp = temp.getNext()) {
 				// if (temp.getData().compareTo(obj) >= 0){
-				if (this.comparator.compare(temp.getData(), obj) >= 0) {
-					// we reach the place
-					newNode.setNext(temp);
-					newNode.setPrev(temp.getPrev());
-					temp.getPrev().setNext(newNode);
-					temp.setPrev(newNode);
-					return true;
-				}
+				// if (this.comparator.compare(temp.getData(), obj) >=0) {
+				// aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+				// we reach the place
+				newNode.setNext(temp);
+				newNode.setPrev(temp.getPrev());
+				temp.getPrev().setNext(newNode);
+				temp.setPrev(newNode);
+				return true;
+				// }
 			}
 			// obj is the largest so it goes at the
 			newNode.setNext(header);
@@ -387,36 +388,54 @@ public class SortedList3Wrapper {
 		@Override
 		public SortedList<E> nearestPredecessors(E e) {
 			SortedCircularDoublyLinkedList<E> newList = new SortedCircularDoublyLinkedList<E>(comparator);
-			Node temp = this.header.getNext();
-			while (temp.next.data != null) {
-				if (temp.next.data == e) {
-					newList.add(temp.prev.data);
-					newList.add(temp.prev.prev.data);
-					newList.add(temp.prev.prev.prev.data);
-					temp = temp.next;
-				}
-				if (temp.next.equals(header)) {
+			Node curNode = header;
+			Node stillNode = header;
+			if (this.isEmpty()) {
+				return newList;
+			}
+			while (curNode.next != header) {
+				if (stillNode.next.data == e) {
 					return newList;
+				} else if (stillNode.next.next.data == e) {
+					newList.add(stillNode.next.data);
+					return newList;
+				} else if (stillNode.prev.data == e) {
+					return newList;
+				} else if (stillNode.prev.prev.data == e) {
+					newList.add(stillNode.prev.data);
+					return newList;
+				} else {
+					if (curNode.data == e) {
+						newList.add(curNode.prev.data);
+						newList.add(curNode.prev.prev.data);
+						newList.add(curNode.prev.prev.prev.data);
+						return newList;
+					}
 				}
-				temp = temp.next;
+				curNode = curNode.next;
 			}
 			return newList;
 		}
 
 		public static void main(String[] args) {
-			SortedCircularDoublyLinkedList<String> newList = new SortedCircularDoublyLinkedList<String>();
-
-			newList.add("Apu");
-			newList.add("Bob");
-			newList.add("Cal");
-			newList.add("Dan");
-			newList.add("Ed");
-			newList.add("Ed");
-			newList.add("Jim");
-			newList.add("Kim");
-			newList.add("Ned");
-
-			System.out.println(newList.nearestPredecessors("Ed"));
+			SortedList<Object> okay = new SortedCircularDoublyLinkedList<Object>();
+			okay.add("Ned");
+			okay.add("Kim");
+			okay.add("Jim");
+			okay.add("Ed");
+			okay.add("Ed");
+			okay.add("Dan");
+			okay.add("Cal");
+			okay.add("Bob");
+			okay.add("Apu");
+			for (Object kek : okay) {
+				System.out.println(kek);
+			}
+			SortedList<Object> kek = okay.nearestPredecessors("Dan");
+			System.out.println("===========");
+			for (Object zek : kek) {
+				System.out.println(zek);
+			}
 		}
 	}
 }

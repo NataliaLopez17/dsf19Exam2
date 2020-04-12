@@ -460,6 +460,7 @@ public class BigOh3Wrapper {
 				L.replace(i, f);
 				stack1.push(L.get(i));
 			}
+
 		}
 		for (int i = 0; i < stack1.size(); i++) {
 			otherL.add(stack1.pop(), 0);

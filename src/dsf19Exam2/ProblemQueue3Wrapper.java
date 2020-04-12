@@ -159,7 +159,10 @@ public class ProblemQueue3Wrapper {
 			s = quotient % 2 + s;
 			quotient = quotient / 2;
 		}
-		for (int i = 0; i < N; i++) {
+		if (N == 0) {
+			s = quotient + s;
+		}
+		for (int i = 0; i <= N; i++) {
 			newQueue.enqueue(s);
 		}
 		return newQueue;
@@ -172,7 +175,19 @@ public class ProblemQueue3Wrapper {
 		q.enqueue("3");
 		q.enqueue("4");
 		q.enqueue("5");
-
+		q.enqueue("6");
+		q.enqueue("7");
+		q.enqueue("8");
+		q.enqueue("9");
+		q.enqueue("10");
+		q.enqueue("11");
+		q.enqueue("12");
+		q.enqueue("13");
+		q.enqueue("14");
+		q.enqueue("15");
+		q.enqueue("16");
+		q.enqueue("17");
+		q.enqueue("18");
 		for (int i = 0; i < q.size(); i++) {
 			System.out.println(binaryNumberSequence(i).dequeue());
 		}
