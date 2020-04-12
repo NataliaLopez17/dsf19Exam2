@@ -152,7 +152,30 @@ public class ProblemQueue3Wrapper {
 	 * binaryNumberSequence(5) returns Q = {1, 10, 11, 100, 101}.
 	 */
 	public static Queue<String> binaryNumberSequence(int N) {
-		return null;
-		// ADD CODE HERE
+		Queue<String> newQueue = new DoublyLinkedQueue<String>();
+		String s = "";
+		int quotient = N;
+		while (quotient != 0) {
+			s = quotient % 2 + s;
+			quotient = quotient / 2;
+		}
+		for (int i = 0; i < N; i++) {
+			newQueue.enqueue(s);
+		}
+		return newQueue;
+	}
+
+	public static void main(String[] args) {
+		Queue<String> q = new DoublyLinkedQueue<String>();
+		q.enqueue("1");
+		q.enqueue("2");
+		q.enqueue("3");
+		q.enqueue("4");
+		q.enqueue("5");
+
+		for (int i = 0; i < q.size(); i++) {
+			System.out.println(binaryNumberSequence(i).dequeue());
+		}
+
 	}
 }
